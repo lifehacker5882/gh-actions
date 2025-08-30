@@ -1,7 +1,7 @@
 name: Deploy exercise
 on: [push, workflow_dispatch]
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: get code
@@ -15,12 +15,23 @@ jobs:
         working-directory: ./second-action-exercise
       - name: run lint
         run: npm run lint
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get code
+        uses: actions/checkout@v5
+      - name: install node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: install dependencies
+        run: npm ci
         working-directory: ./second-action-exercise
       - name: run test
         run: npm test
         working-directory: ./second-action-exercise
   deploy:
-    needs: test
+    needs: [test, lint]
     runs-on: ubuntu-latest
     steps:
       - name: get code

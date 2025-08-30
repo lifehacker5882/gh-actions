@@ -1,8 +1,8 @@
-name: Listening event
+name: Handle issues
 on: issues
 jobs:
-  issue:
+  output-info:
     runs-on: ubuntu-latest
     steps:
       - name: output event detail
-        run: echo "${{ toJSON(github) }}"
+        run: echo "${{ toJSON(github.event) }}"
