@@ -1,0 +1,9 @@
+name: Listening event
+on: issues
+jobs:
+  issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: output event detail
+        run: echo "${{ toJSON(github) }}"
+        working-directory: ./second-action-exercise
