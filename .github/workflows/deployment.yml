@@ -12,10 +12,10 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: npm ci
-        working-directory: ./second-action-react
+        working-directory: ./basic-building-blocks-and-components
       - name: Run tests
         run: npm test
-        working-directory: ./second-action-react
+        working-directory: ./basic-building-blocks-and-components
   deploy:
     needs: test
     runs-on: ubuntu-latest
