@@ -12,10 +12,10 @@ jobs:
           node-version: 18
       - name: install dependencies
         run: npm ci
-        working-directory: ./second-action-exercise
+        working-directory: ./basic-building-blocks-and-components-exercise
       - name: run lint
         run: npm run lint
-        working-directory: ./second-action-exercise
+        working-directory: ./basic-building-blocks-and-components-exercise
   test:
     runs-on: ubuntu-latest
     steps:
@@ -27,10 +27,10 @@ jobs:
           node-version: 18
       - name: install dependencies
         run: npm ci
-        working-directory: ./second-action-exercise
+        working-directory: ./basic-building-blocks-and-components-exercise
       - name: run test
         run: npm test
-        working-directory: ./second-action-exercise
+        working-directory: ./basic-building-blocks-and-components-exercise
   deploy:
     needs: [test, lint]
     runs-on: ubuntu-latest
@@ -43,9 +43,9 @@ jobs:
           node-version: 18
       - name: install dependencies
         run: npm ci
-        working-directory: ./second-action-exercise
+        working-directory: ./basic-building-blocks-and-components-exercise
       - name: Build project
         run: npm run build
-        working-directory: ./second-action-exercise
+        working-directory: ./basic-building-blocks-and-components-exercise
       - name: Deploy
         run: echo "Deploying ..."

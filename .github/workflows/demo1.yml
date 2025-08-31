@@ -25,12 +25,12 @@ jobs:
         uses: actions/checkout@v3
       - name: Install dependencies
         run: npm ci
-        working-directory: ./third-action
+        working-directory: ./workflows-and-events
       - name: Test code
         run: npm run test
-        working-directory: ./third-action
+        working-directory: ./workflows-and-events
       - name: Build code
         run: npm run build
-        working-directory: ./third-action
+        working-directory: ./workflows-and-events
       - name: Deploy project
         run: echo "Deploying..."
