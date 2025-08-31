@@ -11,10 +11,13 @@ jobs:
         uses: actions/checkout@v3
       - name: Install dependencies
         run: npm ci
+        working-directory: ./job-artifacts-and-outputs
       - name: Lint code
         run: npm run lint
+        working-directory: ./job-artifacts-and-outputs
       - name: Test code
         run: npm run test
+        working-directory: ./job-artifacts-and-outputs
   build:
     needs: test
     runs-on: ubuntu-latest
@@ -23,8 +26,17 @@ jobs:
         uses: actions/checkout@v3
       - name: Install dependencies
         run: npm ci
+        working-directory: ./job-artifacts-and-outputs
       - name: Build website
         run: npm run build
+        working-directory: ./job-artifacts-and-outputs
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist-files
+          path: |
+            dist
+            package.json
   deploy:
     needs: build
     runs-on: ubuntu-latest
