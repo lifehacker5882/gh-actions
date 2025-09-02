@@ -31,9 +31,10 @@ jobs:
         id: cache
         uses: actions/cache@v3
         with:
-          path: ~/.npm
+          path: ./controlling-workflow-and-job-execution/node-modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
         working-directory: ./controlling-workflow-and-job-execution
       - name: Test code
@@ -56,9 +57,10 @@ jobs:
         id: cache
         uses: actions/cache@v3
         with:
-          path: ~/.npm
+          path: ./controlling-workflow-and-job-execution/node-modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
         working-directory: ./controlling-workflow-and-job-execution
       - name: Build website
@@ -69,7 +71,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dist-files
-          path: dist
+          path: ./controlling-workflow-and-job-execution/dist
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -78,8 +80,9 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: dist-files
+          path: ./dist
       - name: Output contents
-        run: ls
+        run: ls ./dist
       - name: Deploy
         run: echo "Deploying..."
 
