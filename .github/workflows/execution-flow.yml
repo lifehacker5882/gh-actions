@@ -41,7 +41,7 @@ jobs:
         working-directory: ./controlling-workflow-and-job-execution
       - name: Upload test report
         if: steps.run-tests.outcome == 'failure'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-report
           path: test.json
